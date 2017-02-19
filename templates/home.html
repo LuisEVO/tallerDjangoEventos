@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+
+      {% include "navbar.html" %}
+
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>EVENTUS</h1>
+            <p>Bienvenido a EVENTUS, aquí podrás encontrar eventos que se den en tu ciudad e inscribirte on-line con un solo click.</p>
+            {% if not user.is_authenticated %}
+                {#                <p>¡<a href="{% url 'users:subscribe' %}" role="button">Registrate</a> y crea tu evento ahora!</p>#}
+                <p>Registrate y crea tu evento ahora!</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="page-header">
+            <h4><strong>Eventos disponibles</strong></h4>
+        </div>
+
+        {#        <div class="row">#}
+        {##}
+        {#            <div class="col-md-2">#}
+        {#                <div class="input-group">#}
+        {#                    <span class="input-group-addon"><span class="glyphicon glyphicon-tag"></span></span>#}
+        {#                    <select class="form-control">#}
+        {#                        <option>Categoría</option>#}
+        {#                    </select>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#            <div class="col-md-2">#}
+        {#                <div class="input-group">#}
+        {#                    <span class="input-group-addon"><span class="glyphicon glyphicon-credit-card"></span></span>#}
+        {#                    <select class="form-control">#}
+        {#                        <option>Tipo pago</option>#}
+        {#                    </select>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#            <div class="col-md-8">#}
+        {#                <div class="input-group">#}
+        {#                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>#}
+        {#                    <input type="text" class="form-control" placeholder="Busca el evento de tu gusto">#}
+        {#                </div>#}
+        {#            </div>#}
+        {##}
+        {#        </div>#}
+
+    </div>
+
+    <p></p>
+
+    <div class="container eventos">
+
+        <div class="row contenedor-eventos">
+            {% for evento in eventos %}
+                <div class="col-sm-1 col-md-3 ">
+                    <div class="thumbnail equal">
+                        <img src="{{ evento.imagen.url }}" alt="250x180">
+                        <div class="caption">
+                            <h4><a href="">{{ evento.nombre }}</a></h4>
+                            <small class="date">{{ evento.inicio }}</small>
+                            <div class="place">
+                                <small class="place">{{ evento.lugar}}</small> /
+                            </div>
+                            {#                            <span class="views">{{ event.views }}</span>#}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="container categorias">
+
+        <div class="page-header">
+            <h4><strong>Categorías relacionadas</strong></h4>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1 col-md-12">
+                {% for categoria in categorias %}
+                    <a class="btn btn-default btn-lg btn-fix">
+                        <span class="glyphicon glyphicon-tag"></span> {{ categoria.nombre }}
+                    </a>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container organizadores">
+
+        <div class="page-header">
+            <h4><strong>Organizadores destacados</strong></h4>
+        </div>
+
+        <div class="row">
+            {% for organizador in organizadores %}
+                <div class="col-sm-1 col-md-2">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/300x180" alt="250x180">
+                        <div class="caption">
+                            {{ organizador.username }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

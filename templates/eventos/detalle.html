@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Panel:Detalle{% endblock title %}
+
+{% block body %}
+
+  {% include "navbar.html" %}
+
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="{% url 'eventos:eventoList' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                <strong>Evento: {{ object.nombre }}</strong>
+            </h4>
+        </div><!-- page-header -->
+
+        <div class="row">
+            
+            <div class="col-md-3 text-center">
+                {% if object.imagen %}
+                <img src="{{ object.imagen.url }}" alt="{{ object.nombre }}" class="img-rounded" width="200">
+                {% endif %}
+            </div>
+
+            <div class="col-md-9">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{ object.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <th>Categoria</th>
+                            <td>{{ object.categoria }}</td>
+                        </tr>
+                        <tr>
+                            <th>Contenido</th>
+                            <td>{{ object.contenido }}</td>
+                        </tr>
+                        <tr>
+                            <th>Inicio / Termino</th>
+                            <td>{{ object.inicio | date:'d/m/Y P' }} / {{ object.termino | date:'d/m/Y P' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Lugar</th>
+                            <td>{{ object.lugar }}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio</th>
+                            {% if object.gratis %}
+                                <td><span class="label label-default">Gratuito</span></td>
+                            {% else %}
+                                <td><span class="label label-info">S/. {{ object.precio }}</span></td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div><!-- /container -->
+
+{% endblock %}
